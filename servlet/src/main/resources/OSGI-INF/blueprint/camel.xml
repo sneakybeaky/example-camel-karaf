@@ -2,9 +2,11 @@
 
 
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="
-           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://svn.apache.org/repos/asf/aries/trunk/blueprint/blueprint-cm/src/main/resources/org/apache/aries/blueprint/compendium/cm/blueprint-cm-1.1.0.xsd">
 
 
     <!-- to setup camel servlet with OSGi HttpService -->
@@ -21,6 +23,14 @@
     <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
 
 
+    <cm:property-placeholder persistent-id="com.ninedemons.camel.blueprint.example"
+                             update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="environment" value="dev"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
+
     <camelContext xmlns="http://camel.apache.org/schema/blueprint">
 
         <route>
@@ -32,7 +42,7 @@
                     <header>name</header>
                     <!-- yes so return back a message to the user -->
                     <transform>
-                        <simple>Hello ${header.name} how are you?</simple>
+                        <simple>Hello ${header.name} how are you? I'm running in {{environment}}</simple>
                     </transform>
                 </when>
                 <otherwise>

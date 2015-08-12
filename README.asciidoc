@@ -1,0 +1,35 @@
+= Example Karaf / Blueprint / Camel project
+
+== To get started
+
+=== Build with maven
+
+ $ mvn clean install
+
+=== In Karaf
+
+ karaf@root()> feature:repo-add mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-features/1.0.0-SNAPSHOT/xml/features
+ karaf@root()> feature:repo-add camel 2.15.2
+
+Now for the default (dev) environment do
+
+ karaf@root()> feature:install example-camel-servlet
+
+or for stage do
+
+  karaf@root()> feature:install example-camel-servlet-stage
+
+Then
+
+ $ curl http://localhost:8181/camel-example-servlet-blueprint/camel/hello?name=blah
+
+=== To change config properties
+
+In Karaf :
+
+  karaf@root()> config:edit com.ninedemons.camel.blueprint.example
+  karaf@root()> config:property-list
+  karaf@root()> config:property-set environment lalaland
+  karaf@root()> config:update
+
+And reload the URL above. Magic !

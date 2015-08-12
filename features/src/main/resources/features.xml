@@ -9,4 +9,18 @@
         <bundle>mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-servlet/1.0.0-SNAPSHOT</bundle>
     </feature>
 
+    <feature name="example-camel-servlet-stage" version="${pom.version}" description="Example servlet with Camel for stage environment">
+        <config name="com.ninedemons.camel.blueprint.example">
+            environment = stage
+        </config>
+        <feature>example-camel-servlet</feature>
+    </feature>
+
+    <feature name="example-camel-servlet-qa" version="${pom.version}" description="Example servlet with Camel for QA environment">
+        <config name="com.ninedemons.camel.blueprint.example">
+            environment = qa
+        </config>
+        <feature>example-camel-servlet</feature>
+    </feature>
+
 </features>
