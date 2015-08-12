@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+
+    <!-- to setup camel servlet with OSGi HttpService -->
+    <reference id="httpService" interface="org.osgi.service.http.HttpService"/>
+
+    <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"
+          init-method="register"
+          destroy-method="unregister">
+        <property name="alias" value="/camel-example-servlet-blueprint/camel"/>
+        <property name="httpService" ref="httpService"/>
+        <property name="servlet" ref="camelServlet"/>
+    </bean>
+
+    <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
+
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+
+        <route>
+            <!-- incoming requests from the servlet is routed -->
+            <from uri="servlet:///hello"/>
+            <choice>
+                <when>
+                    <!-- is there a header with the key name? -->
+                    <header>name</header>
+                    <!-- yes so return back a message to the user -->
+                    <transform>
+                        <simple>Hello ${header.name} how are you?</simple>
+                    </transform>
+                </when>
+                <otherwise>
+                    <!-- if no name parameter then output a syntax to the user -->
+                    <transform>
+                        <constant>Add a name parameter to uri, eg ?name=foo</constant>
+                    </transform>
+                </otherwise>
+            </choice>
+        </route>
+
+    </camelContext>
+
+</blueprint>
