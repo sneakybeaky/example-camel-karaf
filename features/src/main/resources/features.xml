@@ -6,21 +6,22 @@
     <feature name="example-camel-servlet" version="${pom.version}" description="Example servlet with Camel">
         <feature version="[2.15,3)">camel-servlet</feature>
         <feature version="[2.15,3)">camel-blueprint</feature>
-        <configfile finalname="/etc/com.ninedemons.camel.blueprint.example.cfg">mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-features/${pom.version}/cfg/configuration</configfile>
         <bundle>mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-servlet/1.0.0-SNAPSHOT</bundle>
     </feature>
 
+
+    <feature name="example-camel-servlet-dev" version="${pom.version}" description="Example servlet with Camel for dev environment">
+        <configfile finalname="/etc/com.ninedemons.camel.blueprint.example.cfg">mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-features/${pom.version}/cfg/dev</configfile>
+        <feature>example-camel-servlet</feature>
+    </feature>
+
     <feature name="example-camel-servlet-stage" version="${pom.version}" description="Example servlet with Camel for stage environment">
-        <config name="com.ninedemons.camel.blueprint.example">
-            environment = stage
-        </config>
+        <configfile finalname="/etc/com.ninedemons.camel.blueprint.example.cfg">mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-features/${pom.version}/cfg/stage</configfile>
         <feature>example-camel-servlet</feature>
     </feature>
 
     <feature name="example-camel-servlet-qa" version="${pom.version}" description="Example servlet with Camel for QA environment">
-        <config name="com.ninedemons.camel.blueprint.example">
-            environment = qa
-        </config>
+        <configfile finalname="/etc/com.ninedemons.camel.blueprint.example.cfg">mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-features/${pom.version}/cfg/qa</configfile>
         <feature>example-camel-servlet</feature>
     </feature>
 

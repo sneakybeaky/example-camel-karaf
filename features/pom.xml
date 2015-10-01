@@ -59,9 +59,19 @@
                                     <classifier>features</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>src/main/resources/com.ninedemons.camel.blueprint.example.cfg</file>
+                                    <file>src/main/resources/qa/com.ninedemons.camel.blueprint.example.cfg</file>
                                     <type>cfg</type>
-                                    <classifier>configuration</classifier>
+                                    <classifier>qa</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>src/main/resources/stage/com.ninedemons.camel.blueprint.example.cfg</file>
+                                    <type>cfg</type>
+                                    <classifier>stage</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>src/main/resources/dev/com.ninedemons.camel.blueprint.example.cfg</file>
+                                    <type>cfg</type>
+                                    <classifier>dev</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>

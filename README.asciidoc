@@ -13,7 +13,7 @@
 
 Now for the default (dev) environment do
 
- karaf@root()> feature:install example-camel-servlet
+ karaf@root()> feature:install example-camel-servlet-dev
 
 or for stage do
 
@@ -29,7 +29,7 @@ In Karaf :
 
   karaf@root()> config:edit com.ninedemons.camel.blueprint.example
   karaf@root()> config:property-list
-  karaf@root()> config:property-set environment lalaland
+  karaf@root()> config:property-set state current
   karaf@root()> config:update
 
 And reload the URL above. Magic !
