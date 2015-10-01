@@ -6,6 +6,7 @@
     <feature name="example-camel-servlet" version="${pom.version}" description="Example servlet with Camel">
         <feature version="[2.15,3)">camel-servlet</feature>
         <feature version="[2.15,3)">camel-blueprint</feature>
+        <configfile finalname="/etc/com.ninedemons.camel.blueprint.example.cfg">mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-features/${pom.version}/cfg/configuration</configfile>
         <bundle>mvn:com.ninedemons.osgi/camel-example-karaf-blueprint-servlet/1.0.0-SNAPSHOT</bundle>
     </feature>
 

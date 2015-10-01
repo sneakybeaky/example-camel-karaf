@@ -26,7 +26,8 @@
     <cm:property-placeholder persistent-id="com.ninedemons.camel.blueprint.example"
                              update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="environment" value="dev"/>
+            <cm:property name="environment" value="unknown"/>
+            <cm:property name="state" value="next"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -42,7 +43,7 @@
                     <header>name</header>
                     <!-- yes so return back a message to the user -->
                     <transform>
-                        <simple>Hello ${header.name} how are you? I'm running in {{environment}}</simple>
+                        <simple>Hello ${header.name} how are you? I'm running in {{environment}} in state {{state}}</simple>
                     </transform>
                 </when>
                 <otherwise>
